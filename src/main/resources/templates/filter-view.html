@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+
+  <meta charset="UTF-8">
+  <title>filter view</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" th:href = "@{/css/home.css}">
+
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+<!--        <div class="logo">-->
+<!--            <img src="https://i.postimg.cc/h4x80MCp/Lotus-Vita-Logo-Blume-weiss.png" alt="">-->
+<!--        </div>-->
+
+        <ul class="nav-area">
+            <li><a th:href="@{'/home-page/' + ${email}}">Home</a></li>
+            <li><a href="#">Your filters</a></li>
+            <li><a  th:href="@{'/addfilter/' + ${email}}">Add new filter</a></li>
+            <li><a class="white" th:text="${email}"></a></li>
+            <li><a th:href="@{/home}" class="white">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+
+        <h3 class="white">List filters</h3>
+
+        <hr/>
+        <table class="table table-bordered table-striped" id="IngredientsTable">
+            <thead class="white">
+            <tr >
+                <th>Nr crt</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Last change</th>
+                <th>Next change</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody class="white">
+            <tr th:each="filter: ${filters}">
+                <td th:text="${filter.id}"></td>
+                <td th:text="${filter.name}"></td>
+                <td th:text="${filter.type}"></td>
+                <td th:text="${filter.lastChange}"></td>
+                <td th:text="${filter.nextChange}"></td>
+                <td>
+                    <a th:href="@{'/updateFilter/' + ${filter.id} + '/' + ${email} }" class="btn btn-info">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{'/deleteFilter/' + ${filter.id} + '/' + ${email} }" class="btn btn-info">Delete</a>
+                </td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</header>
+
+
+
+<!--    <a th:href="@{/ingredients}" >Back to ingredients</a>-->
+</body>
+</html>
